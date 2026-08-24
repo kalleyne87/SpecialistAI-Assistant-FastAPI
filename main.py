@@ -12,6 +12,8 @@ from search_service import SearchService
 from chat_service import ChatService
 from guardrail_service import InputGuardrailService
 
+from auth import require_api_key
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     settings = get_settings()
@@ -47,7 +49,12 @@ async def search(q: str, settings: Settings = Depends(get_settings)):
     service = SearchService(settings)
     return await service.search(q)
 
-@app.post("/api/chat", response_model=ApiChatResponse, response_model_by_alias=True)
+@app.post(
+    "/api/chat",
+    response_model=ApiChatResponse,
+    response_model_by_alias=True,
+    dependencies=[Depends(require_api_key)],
+)
 async def api_chat(body: ApiChatRequest, request: Request):
     guardrail: InputGuardrailService = request.app.state.guardrail
 

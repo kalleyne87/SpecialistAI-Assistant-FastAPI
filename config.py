@@ -5,6 +5,9 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=False)
 
+    api_key: str
+    api_key_header_name: str = "X-Api-Key"
+    
     search_endpoint: str
     search_api_key: str
     search_index_name: str = "chunks-index"
