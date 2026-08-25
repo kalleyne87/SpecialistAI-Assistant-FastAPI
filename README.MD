@@ -12,6 +12,7 @@ The Python rebuild also served a second purpose: making the refusal decision exp
 
 ## Architecture
 
+
 ```
 Client (message + conversation history)
   │
