@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+azure-search-documents
+azure-cosmos
+openai
+langchain-openai
+langgraph
+aiohttp
